@@ -4,23 +4,26 @@
 #include <string>
 #include<vector>
 #include<map>
+#include<unordered_map> 
+#include<set>
 using namespace std;
-int findSubarrayCountwithSumK(vector<int>&a, int k,int n) {
+int subarraysWithXorK(vector<int> &a, int k,int n) {
+    int xr = 0;
     map<int, int> mpp;
-    int presum = 0;
-    int count = 0;
+    mpp[xr]++;
+    int cnt = 0;
     for (int i = 0; i < n; i++) {
-        presum += a[i];
-        int rem = presum - k;
-        count += mpp[rem];
-        mpp[presum]++;
+        xr = xr ^ a[i];
+        int x = xr ^ k;
+        cnt += mpp[x];
+        mpp[xr]++;
     }
-    return count;
+    return cnt;
 }
 int main(){
 int n;
 int k;
-cout<<"Sum";
+cout<<"XOR";
 cin>>k;
   cout<<"array size"<<endl;
   cin>>n;
@@ -29,7 +32,7 @@ cin>>k;
   for(int i=0;i<n;i++){
     cin>>arr[i];
   }
-  cout<<"count of subarrays with sum  = "<<findSubarrayCountwithSumK(arr,k,n)<<endl;
-  return 0; 
+  cout<<"count of subarrays with XOR  = "<<subarraysWithXorK(arr,k,n)<<endl;
+  return 0;
 
 }
